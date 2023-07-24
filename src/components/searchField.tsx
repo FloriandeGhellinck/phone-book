@@ -14,7 +14,7 @@ export const SearchBar: FC<{ setSearchValue?: Dispatch<SetStateAction<string>> }
   }, [formatedSearchValue, setSearchValue]);
 
   return (
-    <form className="w-full md:w-1/2 lg:w-1/3">
+    <form className="w-full md:w-1/3 sm:w-1/2">
       <div className="relative">
         <div className="pointer-events-none absolute inset-y-0 right-0 pr-3 flex items-center">
           <SearchSVG className="fill-primary-blue w-5 h-5" />
