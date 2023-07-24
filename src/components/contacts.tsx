@@ -2,12 +2,11 @@ import { map } from "lodash";
 import { FC } from "react";
 import { Typography } from "./typography";
 import { GarbageSVG } from "@/assets/garbage";
-import { SearchSVG } from "@/assets/search";
 import { PenSVG } from "@/assets/pen";
 import { useQuery } from "react-query";
 import axios, { AxiosResponse } from "axios";
 
-export const UsersTable: FC<{ searchValue: string }> = ({ searchValue }) => {
+export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
   const usersQuery = useQuery<usersQuery, Error>(["usersQuery", searchValue], async () => {
     const response: AxiosResponse<usersQuery> = await axios.get("/api/users", {
       params: {
