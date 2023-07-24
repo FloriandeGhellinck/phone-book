@@ -7,7 +7,7 @@ export const Typography = {
     </h1>
   ),
   h2: ({ className, children, ...props }: React.ComponentPropsWithoutRef<"h2">) => (
-    <h2 className={clsx("text-xl font-bold tracking-normal text-white", className)} {...props}>
+    <h2 className={clsx("text-xl font-bold tracking-normal text-black", className)} {...props}>
       {children}
     </h2>
   ),
