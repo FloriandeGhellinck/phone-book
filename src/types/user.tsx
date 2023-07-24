@@ -4,4 +4,6 @@ type User = {
   last_name: string;
   phone_number: string;
 };
-type usersQuery = User[];
+type UsersQuery = User[];
+
+type CreateUser = Omit<User, "id">;

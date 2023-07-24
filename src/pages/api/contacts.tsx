@@ -1,6 +1,7 @@
+import { fetchData } from "@/utils/fetch-data";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function usersHandler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   try {
     const { searchValue } = req.query;
 
@@ -19,19 +20,11 @@ export default async function usersHandler(req: NextApiRequest, res: NextApiResp
       }
     }`;
 
-    const response = await fetch(`${process.env.HASURA_GRAPHQL_URL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-hasura-admin-secret": `${process.env.HASURA_GRAPHQL_ADMIN_SECRET}`,
-      },
-      body: JSON.stringify({
-        query: usersQuery,
-        variables: {
-          searchValue: `%${searchValue}%`,
-        },
-      }),
-    });
+    const variables = {
+      searchValue: `%${searchValue}%`,
+    };
+
+    const response = await fetchData(usersQuery, variables);
 
     const data = await response.json();
     res.status(200).json(data.data.users);
@@ -40,3 +33,5 @@ export default async function usersHandler(req: NextApiRequest, res: NextApiResp
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
+export default handler;

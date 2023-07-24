@@ -7,10 +7,10 @@ import { useQuery } from "react-query";
 import axios, { AxiosResponse } from "axios";
 
 export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
-  const usersQuery = useQuery<usersQuery, Error>(["usersQuery", searchValue], async () => {
-    const response: AxiosResponse<usersQuery> = await axios.get("/api/users", {
+  const usersQuery = useQuery<UsersQuery, Error>(["usersQuery", searchValue], async () => {
+    const response: AxiosResponse<UsersQuery> = await axios.get("/api/contacts", {
       params: {
-        searchValue: searchValue || "",
+        searchValue: searchValue,
       },
     });
 
