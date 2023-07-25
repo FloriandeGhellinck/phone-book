@@ -29,7 +29,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (response.ok) {
       res.status(200).json({ status: "success", data: responseData });
     } else {
-      throw new Error("Something went wrong when inserting contact");
+      throw new Error("Something went wrong when deleting contact");
     }
   } catch (error) {
     console.error(error);

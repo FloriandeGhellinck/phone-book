@@ -1,4 +1,4 @@
-import { ChevronLeftSVG } from "@/assets/chevron-left";
+import { HomepageButton } from "@/components/homepage-button";
 import { PageLayout } from "@/components/page-layout";
 import { Typography } from "@/components/typography";
 import axios from "axios";
@@ -21,7 +21,7 @@ const NewEntryPage: FC = () => {
 
   const insertNewContact: UseMutationResult<CreateUser> = useMutation((newContact) => axios.post("/api/new-entry", newContact), {
     onSuccess: () => {
-      toast.success("Nouveau contact enregistré.");
+      toast.success("Successfully registered");
       router.push("/");
     },
   });
@@ -33,9 +33,7 @@ const NewEntryPage: FC = () => {
   return (
     <PageLayout>
       <div className="h-4/6 sm:h-4/6 sm:w-5/6 lg:w-3/4 bg-white rounded-2xl shadow-2xl gap-y-4 p-10 flex flex-col items-center">
-        <a href={"/"} className="text-left w-full flex gap-x-1 items-center">
-          <ChevronLeftSVG className="h-4 w-4" /> <Typography.p>Home page</Typography.p>
-        </a>
+        <HomepageButton />
         <Typography.h2>New entry</Typography.h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
           <div>
@@ -76,6 +74,7 @@ const NewEntryPage: FC = () => {
             <button
               type="submit"
               className="border-2 border-black bg-green-600 py-2 px-2 hover:pt-1 hover:pb-3 rounded-lg shadow-2xl shadow-black"
+              disabled={insertNewContact.isLoading}
             >
               Submit
             </button>

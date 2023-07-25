@@ -8,6 +8,7 @@ import axios, { AxiosResponse } from "axios";
 import { PhoneFlipSVG } from "@/assets/phone-flip";
 import { formatNumberForContactTable } from "@/utils/format-phone-number";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
   const queryClient = useQueryClient();
@@ -90,9 +91,9 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
                     <a href={`tel:${user.phone_number}`}>
                       <PhoneFlipSVG className="fill-green-500 h-4 w-4" />
                     </a>
-
-                    <PenSVG className="fill-primary-blue h-4 w-4" />
-
+                    <Link href={`/contact/${user.id}/edit`}>
+                      <PenSVG className="fill-primary-blue h-4 w-4" />
+                    </Link>
                     <button onClick={() => handleDeleteContact(user?.id)}>
                       <GarbageSVG className="fill-red-500 h-4 w-4" />
                     </button>
