@@ -1,3 +1,4 @@
+import { BackSVG, ChevronLeftSVG } from "@/assets/chevron-left";
 import { PageLayout } from "@/components/page-layout";
 import { Typography } from "@/components/typography";
 import axios from "axios";
@@ -29,6 +30,9 @@ const NewEntryPage: FC = () => {
   return (
     <PageLayout>
       <div className="h-4/6 sm:h-4/6 sm:w-5/6 lg:w-3/4 bg-white rounded-2xl shadow-2xl gap-y-4 p-10 flex flex-col items-center">
+        <a href={"/"} className="text-left w-full flex gap-x-1 items-center">
+          <ChevronLeftSVG className="h-4 w-4" /> <Typography.p>Home page</Typography.p>
+        </a>
         <Typography.h2>New entry</Typography.h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
           <div>
@@ -37,7 +41,7 @@ const NewEntryPage: FC = () => {
                 required: "Firstname required",
               })}
               placeholder="First name"
-              className="border-2 border-black rounded-lg w-full pl-1 py-2 focus:outline-none shadow-md"
+              className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 py-2 focus:outline-none shadow-md"
             />
             <Typography.p className="font-light text-red-500">{errors.first_name?.message as String}</Typography.p>
           </div>
@@ -47,7 +51,7 @@ const NewEntryPage: FC = () => {
                 required: "Lastname required",
               })}
               placeholder="Last name"
-              className="border-2 border-black rounded-lg  w-full pl-1 py-2 focus:outline-none shadow-md"
+              className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 py-2 focus:outline-none shadow-md"
             />
             <Typography.p className="font-light text-red-500">{errors.last_name?.message as String}</Typography.p>
           </div>
@@ -57,11 +61,11 @@ const NewEntryPage: FC = () => {
                 required: "Phone number required",
                 pattern: {
                   value: /^\+\d+\s\d{2}\s\d{6}$/,
-                  message: "Invalid format! Try following :  +32 22 123456",
+                  message: "Valid format : +XX XX XXXXXX",
                 },
               })}
               placeholder="+32 472 456123"
-              className="border-2 border-black rounded-lg w-full pl-1 focus:outline-none shadow-md py-2"
+              className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 focus:outline-none shadow-md py-2"
             />
             <Typography.p className="font-light text-red-500">{errors.phone_number?.message as String}</Typography.p>
           </div>

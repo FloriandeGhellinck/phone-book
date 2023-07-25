@@ -5,6 +5,7 @@ import { GarbageSVG } from "@/assets/garbage";
 import { PenSVG } from "@/assets/pen";
 import { useQuery } from "react-query";
 import axios, { AxiosResponse } from "axios";
+import { PhoneFlipSVG } from "@/assets/phone-flip";
 
 export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
   const usersQuery = useQuery<UsersQuery, Error>(["usersQuery", searchValue], async () => {
@@ -20,10 +21,10 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
   const fetchedUsers = usersQuery?.data;
 
   return (
-    <div className="flex items-center overflow-scroll">
-      <table className="w-full">
-        <thead>
-          <tr>
+    <div className="overflow-scroll ">
+      <table className="w-full overflow-scroll">
+        <thead className="sticky top-0 ">
+          <tr className="backdrop-blur-sm ">
             <th className="w-1/4 text-left pl-1 pr-4">
               <Typography.p>Firstname</Typography.p>
             </th>
@@ -37,8 +38,12 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
               <Typography.p>Actions</Typography.p>
             </th>
           </tr>
+          {/* BAD PRACTICE -- TODO -- Hack to avoid having the blur on the border of the tbody */}
+          <tr>
+            <td />
+          </tr>
         </thead>
-        <tbody className="border-2 border-primary-blue">
+        <tbody className="border-2 border-primary-blue overflow-y-scroll">
           {usersQuery.isLoading ? (
             <tr>
               <td>
@@ -46,19 +51,22 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
               </td>
             </tr>
           ) : (
-            map(fetchedUsers, (eachUser: User) => (
-              <tr key={eachUser.id} className="border border-primary-blue border-dashed">
+            map(fetchedUsers, (user: User) => (
+              <tr key={user.id} className="border border-primary-blue border-dashed">
                 <td className="w-1/4 text-left pl-1 py-2 pr-4">
-                  <Typography.p className="font-extralight">{eachUser.first_name}</Typography.p>
+                  <Typography.p className="font-extralight">{user.first_name}</Typography.p>
                 </td>
                 <td className="w-1/4 text-left py-2 pr-4">
-                  <Typography.p className="font-extralight whitespace-nowrap">{eachUser.last_name}</Typography.p>
+                  <Typography.p className="font-extralight whitespace-nowrap">{user.last_name}</Typography.p>
                 </td>
                 <td className="w-1/4 text-left whitespace-nowrap py-2 pr-4">
-                  <Typography.p className="font-extralight">{eachUser.phone_number}</Typography.p>
+                  <Typography.p className="font-extralight">{user.phone_number}</Typography.p>
                 </td>
                 <td className="text-right pr-3 w-full py-2">
                   <div className="flex justify-end gap-x-2">
+                    <a href={`tel:${user.phone_number}`}>
+                      <PhoneFlipSVG className="fill-green-500 h-4 w-4" />
+                    </a>
                     <PenSVG className="fill-primary-blue h-4 w-4" />
                     <GarbageSVG className="fill-red-500 h-4 w-4" />
                   </div>
