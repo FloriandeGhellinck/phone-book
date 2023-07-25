@@ -6,6 +6,7 @@ import { PenSVG } from "@/assets/pen";
 import { useQuery } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { PhoneFlipSVG } from "@/assets/phone-flip";
+import { formatNumberForContactTable } from "@/utils/format-phone-number";
 
 export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
   const usersQuery = useQuery<UsersQuery, Error>(["usersQuery", searchValue], async () => {
@@ -60,7 +61,7 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
                   <Typography.p className="font-extralight whitespace-nowrap">{user.last_name}</Typography.p>
                 </td>
                 <td className="w-1/4 text-left whitespace-nowrap py-2 pr-4">
-                  <Typography.p className="font-extralight">{user.phone_number}</Typography.p>
+                  <Typography.p className="font-extralight">{formatNumberForContactTable(user.phone_number)}</Typography.p>
                 </td>
                 <td className="text-right pr-3 w-full py-2">
                   <div className="flex justify-end gap-x-2">

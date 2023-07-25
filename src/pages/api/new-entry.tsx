@@ -1,9 +1,12 @@
 import { fetchData } from "@/utils/fetch-data";
+import { formatNumberForDB } from "@/utils/format-phone-number";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   try {
     const { first_name, last_name, phone_number } = req.body;
+
+    const numberFormatedForDB = formatNumberForDB(phone_number);
 
     const insertNewContact = `
     mutation MyMutation($first_name: String, $last_name: String, $phone_number: String) {
@@ -21,7 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void>
     const variables = {
       first_name,
       last_name,
-      phone_number,
+      phone_number: numberFormatedForDB,
     };
 
     const response = await fetchData(insertNewContact, variables);

@@ -63,8 +63,8 @@ const NewEntryPage: FC = () => {
               {...register("phone_number", {
                 required: "Phone number required",
                 pattern: {
-                  value: /^\+\d+\s\d{2}\s\d{6}$/,
-                  message: "Valid format : +XX XX XXXXXX",
+                  value: /^\+\d+\s\d+\s\d{6,}$/,
+                  message: "Invalid format! Try: +32 472 756044",
                 },
               })}
               placeholder="+32 472 456123"
