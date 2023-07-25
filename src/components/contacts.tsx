@@ -3,12 +3,15 @@ import { FC } from "react";
 import { Typography } from "./typography";
 import { GarbageSVG } from "@/assets/garbage";
 import { PenSVG } from "@/assets/pen";
-import { useQuery } from "react-query";
+import { UseMutationResult, useMutation, useQuery, useQueryClient } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { PhoneFlipSVG } from "@/assets/phone-flip";
 import { formatNumberForContactTable } from "@/utils/format-phone-number";
+import { toast } from "react-toastify";
 
 export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
+  const queryClient = useQueryClient();
+
   const usersQuery = useQuery<UsersQuery, Error>(["usersQuery", searchValue], async () => {
     const response: AxiosResponse<UsersQuery> = await axios.get("/api/contacts", {
       params: {
@@ -20,6 +23,25 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
   });
 
   const fetchedUsers = usersQuery?.data;
+
+  const deleteContact: UseMutationResult = useMutation((userId) => axios.post("/api/delete-contact", { userId }), {
+    onSuccess: () => {
+      toast.success("Contact deleted");
+      queryClient.invalidateQueries({ queryKey: ["usersQuery"] });
+    },
+    onError: () => {
+      toast.error("Error ");
+    },
+  });
+
+  const handleDeleteContact = (userId: string) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete the contact ?");
+    if (confirmDelete) {
+      deleteContact.mutate(userId);
+    } else {
+      toast.error("Contact not deleted");
+    }
+  };
 
   return (
     <div className="overflow-scroll ">
@@ -68,8 +90,12 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
                     <a href={`tel:${user.phone_number}`}>
                       <PhoneFlipSVG className="fill-green-500 h-4 w-4" />
                     </a>
+
                     <PenSVG className="fill-primary-blue h-4 w-4" />
-                    <GarbageSVG className="fill-red-500 h-4 w-4" />
+
+                    <button onClick={() => handleDeleteContact(user?.id)}>
+                      <GarbageSVG className="fill-red-500 h-4 w-4" />
+                    </button>
                   </div>
                 </td>
               </tr>

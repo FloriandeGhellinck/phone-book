@@ -1,16 +1,13 @@
 import { fetchData } from "@/utils/fetch-data";
-import { formatNumberForDB } from "@/utils/format-phone-number";
 import { NextApiRequest, NextApiResponse } from "next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { first_name, last_name, phone_number } = req.body;
+    const { userId } = req.body;
 
-    const numberFormatedForDB = formatNumberForDB(phone_number);
-
-    const insertNewContact = `
-    mutation MyMutation($first_name: String, $last_name: String, $phone_number: String) {
-        insert_users(objects: {first_name: $first_name, last_name: $last_name, phone_number: $phone_number}) {
+    const deleteContact = `
+      mutation MyMutation($id: uuid) {
+        delete_users(where: {id: {_eq: $id}}) {
           returning {
             first_name
             id
@@ -19,15 +16,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         }
       }
-    `;
+      
+      `;
 
     const variables = {
-      first_name,
-      last_name,
-      phone_number: numberFormatedForDB,
+      id: userId,
     };
 
-    const response = await fetchData(insertNewContact, variables);
+    const response = await fetchData(deleteContact, variables);
     const responseData = await response.json();
 
     if (response.ok) {
