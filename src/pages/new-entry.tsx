@@ -1,4 +1,4 @@
-import { BackSVG, ChevronLeftSVG } from "@/assets/chevron-left";
+import { ChevronLeftSVG } from "@/assets/chevron-left";
 import { PageLayout } from "@/components/page-layout";
 import { Typography } from "@/components/typography";
 import axios from "axios";
@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { UseMutationResult, useMutation } from "react-query";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewEntryPage: FC = () => {
   const {
@@ -19,6 +21,7 @@ const NewEntryPage: FC = () => {
 
   const insertNewContact: UseMutationResult<CreateUser> = useMutation((newContact) => axios.post("/api/new-entry", newContact), {
     onSuccess: () => {
+      toast.success("Nouveau contact enregistré.");
       router.push("/");
     },
   });

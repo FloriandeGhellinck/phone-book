@@ -16,12 +16,26 @@
   }
 }
 
+.Toastify__toast {
+  border-radius: 10px !important;
+}
+
+.Toastify__toast-container {
+  top: auto !important;
+  bottom: 0 !important;
+  padding: 20px !important;
+}
+
+@media (min-width: 481px) {
+  .Toastify__toast-container {
+    top: 0 !important;
+    bottom: auto !important;
+  }
+}
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
