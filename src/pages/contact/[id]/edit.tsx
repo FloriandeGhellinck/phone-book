@@ -45,6 +45,10 @@ const EditContactPage: FC = () => {
       toast.success("Succesfully edited!");
       router.push("/");
     },
+    onError: () => {
+      toast.error("Contact not edited");
+      router.push("/");
+    },
   });
 
   const onSubmit = (values: CreateUser) => {
@@ -59,53 +63,51 @@ const EditContactPage: FC = () => {
         {userQuery.isError && <Typography.h2> Error detected</Typography.h2>}
         {userQuery.isLoading && <Typography.h2>Loading</Typography.h2>}
         {fetchedUser && (
-          <div>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
-              <div>
-                <input
-                  {...register("first_name", {
-                    required: "Firstname required",
-                  })}
-                  placeholder="First name"
-                  className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 py-2 focus:outline-none shadow-md"
-                />
-                <Typography.p className="font-light text-red-500">{errors.first_name?.message as String}</Typography.p>
-              </div>
-              <div>
-                <input
-                  {...register("last_name", {
-                    required: "Lastname required",
-                  })}
-                  placeholder="Last name"
-                  className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 py-2 focus:outline-none shadow-md"
-                />
-                <Typography.p className="font-light text-red-500">{errors.last_name?.message as String}</Typography.p>
-              </div>
-              <div>
-                <input
-                  {...register("phone_number", {
-                    required: "Phone number required",
-                    pattern: {
-                      value: /^\+\d+\s\d+\s\d{6,}$/,
-                      message: "Invalid format! Try: +32 472 756044",
-                    },
-                  })}
-                  placeholder="+32 472 456123"
-                  className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 focus:outline-none shadow-md py-2"
-                />
-                <Typography.p className="font-light text-red-500">{errors.phone_number?.message as String}</Typography.p>
-              </div>
-              <div className="flex gap-x-4 justify-center">
-                <button
-                  type="submit"
-                  className="border-2 border-black bg-green-600 py-2 px-2 hover:pt-1 hover:pb-3 rounded-lg shadow-2xl shadow-black"
-                  disabled={editContact.isLoading}
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
+            <div>
+              <input
+                {...register("first_name", {
+                  required: "Firstname required",
+                })}
+                placeholder="First name"
+                className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 py-2 focus:outline-none shadow-md"
+              />
+              <Typography.p className="font-light text-red-500">{errors.first_name?.message as String}</Typography.p>
+            </div>
+            <div>
+              <input
+                {...register("last_name", {
+                  required: "Lastname required",
+                })}
+                placeholder="Last name"
+                className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 py-2 focus:outline-none shadow-md"
+              />
+              <Typography.p className="font-light text-red-500">{errors.last_name?.message as String}</Typography.p>
+            </div>
+            <div>
+              <input
+                {...register("phone_number", {
+                  required: "Phone number required",
+                  pattern: {
+                    value: /^\+\d+\s\d+\s\d{6,}$/,
+                    message: "Invalid format! Try: +32 472 756044",
+                  },
+                })}
+                placeholder="+32 472 456123"
+                className="border-2 border-black rounded-lg w-full sm:w-80 pl-1 focus:outline-none shadow-md py-2"
+              />
+              <Typography.p className="font-light text-red-500">{errors.phone_number?.message as String}</Typography.p>
+            </div>
+            <div className="flex gap-x-4 justify-center">
+              <button
+                type="submit"
+                className="border-2 border-black bg-green-600 py-2 px-2 hover:pt-1 hover:pb-3 rounded-lg shadow-2xl shadow-black"
+                disabled={editContact.isLoading}
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         )}
       </div>
     </PageLayout>

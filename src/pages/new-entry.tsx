@@ -24,6 +24,10 @@ const NewEntryPage: FC = () => {
       toast.success("Successfully registered");
       router.push("/");
     },
+    onError: () => {
+      toast.error("New entry not registered");
+      router.push("/");
+    },
   });
 
   const onSubmit = (data: CreateUser) => {

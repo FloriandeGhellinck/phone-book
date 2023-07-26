@@ -23,6 +23,8 @@ cd phone-book
 
 ```bash
 npm install
+# or
+yarn install
 ```
 
 ## Usage
@@ -31,7 +33,35 @@ After installation, you can start the application by running:
 
 ```bash
 npm run dev
+# or
+yarn dev
 ```
+
+## Technologies
+
+### Database
+
+- PostgreSQL 15.3
+
+### Query manager
+
+- ReactQuery 3.39.3
+
+### React
+
+- React 18.2.0
+- Next 13.4.10
+
+### Style/CSS
+
+- Tailwindcss 3.3.3
+
+### Utils
+
+- Lodash 4.17.21
+- React Hook Fom 7.45.2
+- React Toastify 9.1.3
+- Typescript 5.1.6
 
 This starts the development server, and you can access the application by opening your web browser and navigating to `localhost:PORT`.
 

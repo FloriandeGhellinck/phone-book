@@ -31,7 +31,7 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
       queryClient.invalidateQueries({ queryKey: ["usersQuery"] });
     },
     onError: () => {
-      toast.error("Error ");
+      toast.error("Error deleting contact");
     },
   });
 
