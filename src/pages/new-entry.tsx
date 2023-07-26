@@ -36,7 +36,7 @@ const NewEntryPage: FC = () => {
 
   return (
     <PageLayout>
-      <div className="h-4/6 sm:h-4/6 sm:w-5/6 lg:w-3/4 bg-white rounded-2xl shadow-2xl gap-y-4 p-10 flex flex-col items-center">
+      <div className="h-5/6 lg:w-3/4 bg-white rounded-2xl shadow-2xl gap-y-4 p-10 flex flex-col items-center">
         <HomepageButton />
         <Typography.h2>New entry</Typography.h2>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
