@@ -37,6 +37,8 @@ npm run dev
 yarn dev
 ```
 
+This starts the development server, and you can access the application by opening your web browser and navigating to `localhost:PORT`.
+
 ## Technologies
 
 ### Database
@@ -62,8 +64,6 @@ yarn dev
 - React Hook Fom 7.45.2
 - React Toastify 9.1.3
 - Typescript 5.1.6
-
-This starts the development server, and you can access the application by opening your web browser and navigating to `localhost:PORT`.
 
 ## Contact
 
