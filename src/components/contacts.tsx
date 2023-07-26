@@ -68,7 +68,14 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
           </tr>
         </thead>
         <tbody className="border-2 border-primary-blue overflow-y-scroll">
-          {usersQuery.isLoading ? (
+          {usersQuery.isError && (
+            <tr>
+              <td>
+                <Typography.h2> Error detected</Typography.h2>
+              </td>
+            </tr>
+          )}
+          {!usersQuery.isError && usersQuery.isLoading ? (
             <tr>
               <td>
                 <Typography.h2> Loading</Typography.h2>
