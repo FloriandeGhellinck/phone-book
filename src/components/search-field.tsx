@@ -23,7 +23,7 @@ export const SearchBar: FC<{ setSearchValue?: Dispatch<SetStateAction<string>> }
           {...register("searchInput")}
           type="text"
           placeholder="Enter name or number.."
-          className="w-full rounded-lg border-2 border-primary-blue placeholder:text-gray-300 py-2 px-2 focus:outline-none "
+          className="w-full rounded-lg border-2 border-primary-blue text-black placeholder:text-gray-300 py-2 px-2 focus:outline-none "
         />
       </div>
     </form>
