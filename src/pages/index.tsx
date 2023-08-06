@@ -2,6 +2,7 @@ import { PageLayout } from "@/components/page-layout";
 import { SearchBar } from "@/components/search-field";
 import { ContactsTable } from "@/components/contacts";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState<string>("");
