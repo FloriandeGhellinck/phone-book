@@ -95,9 +95,9 @@ export const ContactsTable: FC<{ searchValue: string }> = ({ searchValue }) => {
                 </td>
                 <td className="text-right pr-3 w-full py-2">
                   <div className="flex justify-end gap-x-2">
-                    <a href={`tel:${user.phone_number}`}>
+                    <Link href={`tel:${user.phone_number}`}>
                       <PhoneFlipSVG className="fill-green-500 h-4 w-4" />
-                    </a>
+                    </Link>
                     <Link href={`/contact/${user.id}/edit`}>
                       <PenSVG className="fill-primary-blue h-4 w-4" />
                     </Link>
